@@ -37,13 +37,13 @@ export default {
 }
 
 .list-animated-item {
-  transition: all 1s;
+  transition: opacity 0.5s;
 }
 .list-animated-enter {
   opacity: 0;
-  transform: translateX(30px);
+  /* transform: translateX(30px); */
 }
-.list-animated-leave-to {
+/* .list-animated-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }
@@ -52,5 +52,5 @@ export default {
   position: absolute;
   min-width: 1000%;
   height: 20%;
-}
+} */
 </style>

@@ -58,22 +58,24 @@ video {
   display: grid;
   width: 100vw;
   height: 100vh;
-  grid-template-columns: 100%;
-  grid-template-rows: [top] 70% [middle] 10% [bottom] 20% [end];
+  grid-template-columns: 100vw;
+  grid-template-rows: [top] 70vh [middle] 10vh [bottom] 20vh [end];
   justify-items: center;
+  overflow: hidden;
 }
 
 .video {
   grid-column: 1;
   grid-row: top / bottom;
   user-select: none;
+  max-width: unset;
 }
 .photo-button-container {
   grid-column: 1;
   grid-row: middle / bottom;
   z-index: 5;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 20vh;
   display: flex;
   justify-content: center;
 }
