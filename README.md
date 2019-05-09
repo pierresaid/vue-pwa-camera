@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/791cba32-76f9-4247-a059-adfa46e27ae1/deploy-status)](https://app.netlify.com/sites/boring-euclid-5be799/deploys)
 # demo
 https://boring-euclid-5be799.netlify.com/
 # vue-pwa-camera
