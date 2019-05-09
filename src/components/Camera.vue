@@ -2,7 +2,7 @@
   <div class="wrapper">
     <video class="video" ref="video"/>
     <div class="photo-button-container">
-      <button class="button photo-button is-medium" @click="TakePhoto">
+      <button class="button photo-button" @click="TakePhoto">
         <b-icon pack="fas" icon="camera"/>
       </button>
     </div>
@@ -66,6 +66,7 @@ video {
 .video {
   grid-column: 1;
   grid-row: top / bottom;
+  user-select: none;
 }
 .photo-button-container {
   grid-column: 1;
@@ -78,10 +79,15 @@ video {
 }
 
 .photo-button {
+  width: 10vh;
+  height: 10vh;
   border-radius: 100%;
-  color: black;
 }
 
+.photo-button {
+  font-size: 4vh;
+  color: black;
+}
 .gallery {
   grid-column: 1;
   grid-row: bottom / end;

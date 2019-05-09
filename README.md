@@ -1,3 +1,5 @@
+# demo
+https://boring-euclid-5be799.netlify.com/
 # vue-pwa-camera
 
 ## Project setup

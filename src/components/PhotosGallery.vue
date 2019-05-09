@@ -17,7 +17,9 @@ export default {
   props: {
     photos: {
       type: Array,
-      default: []
+      default: () => {
+        return [];
+      }
     }
   }
 };
@@ -31,6 +33,7 @@ export default {
   overflow-x: scroll;
   overflow-y: hidden;
   background-color: rgb(20, 20, 20);
+  user-select: none;
 }
 
 .list-animated-item {
