@@ -1,15 +1,16 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/791cba32-76f9-4247-a059-adfa46e27ae1/deploy-status)](https://app.netlify.com/sites/boring-euclid-5be799/deploys)
-# demo
-https://boring-euclid-5be799.netlify.com/
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c1c200ce-b925-46ab-ab61-6df9e93be4ed/deploy-status)](https://app.netlify.com/sites/vue-pwa-camera/deploys)
 # vue-pwa-camera
+A simple camera progressive web app built with Vue.js.
+
+## [Live Demo :rocket:](https://vue-pwa-camera.netlify.com/)
 
 ## Project setup
-```
+```bash
 npm install
 ```
 
 ### Compiles and hot-reloads for development
-```
+```bash
 npm run serve
 ```
 
@@ -17,16 +18,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
