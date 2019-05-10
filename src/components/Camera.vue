@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <video class="video" :class="activeDevice === 0 ? 'front' : ''" ref="video"/>
+    <canvas style="display:none" ref="canva"/>
 
     <button
       v-if="videoDevices.length > 1"
@@ -42,15 +43,31 @@ export default {
         video: { deviceId: { exact: this.videoDevices[deviceIdx].deviceId } }
       });
       video.srcObject = this.mediaStream;
-      const mediaStreamTrack = this.mediaStream.getVideoTracks()[0];
-      this.imageCapture = new ImageCapture(mediaStreamTrack);
       video.play();
     },
     async TakePhoto() {
-      let blob = await this.imageCapture.takePhoto();
-      console.log(blob);
+      let video = this.$refs.video;
+      let canva = this.$refs.canva;
+      let width = video.videoWidth;
+      let height = video.videoHeight;
+      canva.width = width;
+      canva.height = height;
+      let ctx = canva.getContext("2d");
+      ctx.save();
 
-      this.photos.push({ id: this.counter++, src: URL.createObjectURL(blob) });
+      if (this.activeDevice === 0) {
+        ctx.scale(-1, 1);
+        ctx.drawImage(video, width * -1, 0, width, height);
+      } else {
+        ctx.drawImage(video, 0, 0);
+      }
+
+      ctx.restore();
+
+      this.photos.push({
+        id: this.counter++,
+        src: canva.toDataURL("image/png")
+      });
     },
     switchCamera() {
       const tracks = this.mediaStream.getVideoTracks();

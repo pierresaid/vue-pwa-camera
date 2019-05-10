@@ -50,8 +50,6 @@ export default {
 
 img {
   height: 100%;
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
   /* grid-column: b / e; */
   /* grid-row: b/e; */
   /* min-width: 26vh; */
