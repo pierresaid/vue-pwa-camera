@@ -7,6 +7,7 @@
       v-if="videoDevices.length > 1"
       class="button is-rounded is-outlined switch-button"
       @click="switchCamera"
+      :disabled="switchingCamera"
     >
       <b-icon pack="fas" icon="sync-alt"/>
     </button>
@@ -18,8 +19,6 @@
     <photos-gallery class="gallery" :photos="photos"/>
   </div>
 </template>
-
-
 
 <script>
 import PhotosGallery from "./PhotosGallery.vue";
@@ -33,17 +32,18 @@ export default {
       mediaStream: null,
       videoDevices: [],
       activeDevice: 0,
-      counter: 0
+      counter: 0,
+      switchingCamera: false
     };
   },
   methods: {
-    async StartRecording(deviceIdx) {
+    async StartRecording() {
       let video = this.$refs.video;
       this.mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: { deviceId: { exact: this.videoDevices[deviceIdx].deviceId } }
+        video: { facingMode: (this.activeDevice === 0 ? "environment" : "user") }
       });
       video.srcObject = this.mediaStream;
-      video.play();
+      await video.play();
     },
     async TakePhoto() {
       let video = this.$refs.video;
@@ -69,19 +69,21 @@ export default {
         src: canva.toDataURL("image/png")
       });
     },
-    switchCamera() {
+    async switchCamera() {
+      this.switchingCamera = true;
       const tracks = this.mediaStream.getVideoTracks();
       tracks.forEach(track => {
         track.stop();
       });
-      this.StartRecording((this.activeDevice + 1) % 2);
+      await this.StartRecording();
       this.activeDevice = (this.activeDevice + 1) % 2;
+      this.switchingCamera = false;
     }
   },
   async mounted() {
     const devices = await navigator.mediaDevices.enumerateDevices();
     this.videoDevices = devices.filter(d => d.kind === "videoinput");
-    this.StartRecording(0);
+    await this.StartRecording();
   }
 };
 </script>
