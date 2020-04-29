@@ -2,7 +2,7 @@
 # vue-pwa-camera
 A simple camera progressive web app built with Vue.js.
 
-## [Live Demo :rocket:](https://vue-pwa-camera.netlify.com/)
+## [Live Demo :rocket:](https://vue-pwa-camera.netlify.app/)
 
 ## Project setup
 ```bash
