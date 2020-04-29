@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <video class="video" :class="activeDevice === 0 ? 'front' : ''" ref="video"/>
+    <video class="video" :class="facingMode === 'user' ? 'front' : ''" ref="video"/>
     <canvas style="display:none" ref="canva"/>
 
     <button
@@ -31,19 +31,20 @@ export default {
       photos: [],
       mediaStream: null,
       videoDevices: [],
-      activeDevice: 0,
+      facingMode: "environment",
       counter: 0,
       switchingCamera: false
     };
   },
   methods: {
-    async StartRecording() {
+    async StartRecording(facingMode) {
+      this.facingMode = facingMode;
       let video = this.$refs.video;
       this.mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: (this.activeDevice === 0 ? "environment" : "user") }
+        video: { facingMode: facingMode }
       });
       video.srcObject = this.mediaStream;
-      await video.play();
+      return await video.play();
     },
     async TakePhoto() {
       let video = this.$refs.video;
@@ -55,7 +56,7 @@ export default {
       let ctx = canva.getContext("2d");
       ctx.save();
 
-      if (this.activeDevice === 0) {
+      if (this.facingMode === "user") {
         ctx.scale(-1, 1);
         ctx.drawImage(video, width * -1, 0, width, height);
       } else {
@@ -75,15 +76,14 @@ export default {
       tracks.forEach(track => {
         track.stop();
       });
-      await this.StartRecording();
-      this.activeDevice = (this.activeDevice + 1) % 2;
+      await this.StartRecording(this.facingMode === "environment" ? "user" : "environment");
       this.switchingCamera = false;
     }
   },
   async mounted() {
     const devices = await navigator.mediaDevices.enumerateDevices();
     this.videoDevices = devices.filter(d => d.kind === "videoinput");
-    await this.StartRecording();
+    await this.StartRecording("environment");
   }
 };
 </script>
