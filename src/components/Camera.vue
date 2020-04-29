@@ -83,7 +83,7 @@ export default {
   async mounted() {
     const devices = await navigator.mediaDevices.enumerateDevices();
     this.videoDevices = devices.filter(d => d.kind === "videoinput");
-    await this.StartRecording("environment");
+    await this.StartRecording(this.videoDevices.length === 1 ? "user" : "environment");
   }
 };
 </script>
