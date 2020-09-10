@@ -15,7 +15,4 @@ export default {
 
 
 <style>
-/* html {
-  overflow: hidden !important;
-} */
 </style>
