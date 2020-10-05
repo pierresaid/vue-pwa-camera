@@ -135,7 +135,7 @@ export default {
   grid-row: middle / bottom;
   z-index: 5;
   width: 100vw;
-  height: 20vh;
+  height: 10vh;
   display: flex;
   justify-content: center;
 }
