@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <camera/>
+    <camera />
   </div>
 </template>
 
@@ -8,8 +8,8 @@
 import Camera from "./components/Camera.vue";
 export default {
   components: {
-    Camera
-  }
+    Camera,
+  },
 };
 </script>
 

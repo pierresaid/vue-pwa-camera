@@ -1,7 +1,11 @@
 <template>
   <div class="wrapper">
-    <video class="video" :class="facingMode === 'user' ? 'front' : ''" ref="video"/>
-    <canvas style="display:none" ref="canva"/>
+    <video
+      class="video"
+      :class="facingMode === 'user' ? 'front' : ''"
+      ref="video"
+    />
+    <canvas style="display: none" ref="canva" />
 
     <button
       v-if="videoDevices.length > 1"
@@ -9,14 +13,14 @@
       @click="switchCamera"
       :disabled="switchingCamera"
     >
-      <b-icon pack="fas" icon="sync-alt"/>
+      <b-icon pack="fas" icon="sync-alt" />
     </button>
     <div class="photo-button-container">
       <button class="button photo-button" @click="TakePhoto">
-        <b-icon pack="fas" icon="camera"/>
+        <b-icon pack="fas" icon="camera" />
       </button>
     </div>
-    <photos-gallery class="gallery" :photos="photos"/>
+    <photos-gallery class="gallery" :photos="photos" />
   </div>
 </template>
 
@@ -24,7 +28,7 @@
 import PhotosGallery from "./PhotosGallery.vue";
 export default {
   components: {
-    PhotosGallery
+    PhotosGallery,
   },
   data() {
     return {
@@ -33,7 +37,7 @@ export default {
       videoDevices: [],
       facingMode: "environment",
       counter: 0,
-      switchingCamera: false
+      switchingCamera: false,
     };
   },
   methods: {
@@ -41,7 +45,7 @@ export default {
       this.facingMode = facingMode;
       let video = this.$refs.video;
       this.mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: facingMode }
+        video: { facingMode: facingMode },
       });
       video.srcObject = this.mediaStream;
       return await video.play();
@@ -67,24 +71,28 @@ export default {
 
       this.photos.push({
         id: this.counter++,
-        src: canva.toDataURL("image/png")
+        src: canva.toDataURL("image/png"),
       });
     },
     async switchCamera() {
       this.switchingCamera = true;
       const tracks = this.mediaStream.getVideoTracks();
-      tracks.forEach(track => {
+      tracks.forEach((track) => {
         track.stop();
       });
-      await this.StartRecording(this.facingMode === "environment" ? "user" : "environment");
+      await this.StartRecording(
+        this.facingMode === "environment" ? "user" : "environment"
+      );
       this.switchingCamera = false;
-    }
+    },
   },
   async mounted() {
     const devices = await navigator.mediaDevices.enumerateDevices();
-    this.videoDevices = devices.filter(d => d.kind === "videoinput");
-    await this.StartRecording(this.videoDevices.length === 1 ? "user" : "environment");
-  }
+    this.videoDevices = devices.filter((d) => d.kind === "videoinput");
+    await this.StartRecording(
+      this.videoDevices.length === 1 ? "user" : "environment"
+    );
+  },
 };
 </script>
 
