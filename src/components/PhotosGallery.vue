@@ -5,7 +5,6 @@
       v-for="photo in photos"
       :key="photo.id"
       :src="photo.src"
-      v-on:remove="photos.splice(photos.findIndex(p => p.id === photo.id), 1)"
     />
   </transition-group>
 </template>
